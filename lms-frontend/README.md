@@ -1,102 +1,151 @@
-# LMS Frontend
+# 🎓 LMS Frontend
 
-### Setup instruction
+This is the **frontend** of a Learning Management System (LMS) built with **React**, **Tailwind CSS**, and **CSS Modules**. It offers a modern, responsive, and secure platform for students and instructors to interact, manage courses, attend lectures, and more.
 
-1. Clone the project
+---
 
-```
-    git clone https://github.com/singhsanket143/lms-frontend-hn.git
-```
+## 🚀 Features
 
-2. Move into the directory
+- 🧑‍🎓 User and Admin Role-based Access
+- 📚 Browse and manage courses
+- 🧾 Secure authentication (JWT-based)
+- 💳 Payment integration with success/failure handling
+- 🎥 Lecture display and upload
+- 📝 Course reviews and feedback system
+- 👨‍🏫 Profile management
+- 💻 Online Code Editor (like CodePen)
+- 🔒 Protected routes with role checks
+- 📱 Fully responsive UI
 
-```
-    cd lms-frontend-hn
-```
+---
 
-3. install dependencies
+## 🛠️ Tech Stack
 
-```
-    npm i
-```
+- **Framework:** React
+- **Routing:** React Router
+- **Styling:** Tailwind CSS, CSS Modules
+- **State Management:** Redux Toolkit, Context API
+- **API Calls:** Axios
+- **Authentication:** JWT stored in cookies (via backend)
+- **UI Components:** Chakra UI
+- **Editor:** Monaco-based Code Editor
+- **Others:** React Hook Form, React Player, Chart.js
 
-4. run the server
+---
 
-```
-    npm run dev
-```
-
-
-
-### Setup instructions for tailwind
-
-[Tail wind official instruction doc](https://tailwindcss.com/docs/installation)
-
-1. Install tailwindcss
-
-```
-    npm install -D tailwindcss postcss autoprefixer
-```
-
-2. Create tailwind config file 
+## 📁 Folder Structure (Simplified)
 
 ```
-    npx tailwindcss init
+src/
+├── App.js
+├── index.js
+├── Pages/
+│   ├── Course/
+│   ├── Dashboard/
+│   ├── Payments/
+│   ├── Revievs/
+│   └── User/
+├── Components/
+│   └── Auth/
+├── CodeOnline/
+│   └── components/
+├── Redux/
+│   ├── store.js
+│   └── Slices/
+│       ├── AuthSlice.js
+│       ├── CourseSlice.js
+│       ├── PaymentSlice.js
+│       └── LectureSlice.js
 ```
 
-3. Add file extensions to tailwind config file in the contents property
+---
+
+## 🔗 Key Routes
+
+| Path                     | Component           | Access      |
+|--------------------------|---------------------|-------------|
+| `/`                      | HomePage            | Public      |
+| `/login`                 | Login               | Public      |
+| `/signup`                | Signup              | Public      |
+| `/courses`               | CourseList          | Public      |
+| `/course/description`    | CourseDescription   | Public      |
+| `/user/profile`          | Profile             | Protected   |
+| `/user/editprofile`      | EditProfile         | Protected   |
+| `/course/create`         | CreateCourse        | Admin Only  |
+| `/course/update`         | UpdateCourse        | Admin Only  |
+| `/course/displaylectures`| DisplayLecture      | Protected   |
+| `/course/addlecture`     | AddLecture          | Admin Only  |
+| `/checkout`              | Subscribe           | Protected   |
+| `/checkout/success`      | CheckoutSuccess     | Protected   |
+| `/checkout/fail`         | CheckoutFailure     | Protected   |
+| `/code-online`           | CodeEditor          | Public      |
+| `/addreview`             | SubmitReview        | Protected   |
+| `/allreview`             | AllReviews          | Public      |
+| `*`                      | NotFound            | Fallback    |
+
+---
+
+## 🧪 Setup & Run Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/lms-frontend.git
+   cd lms-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Add environment variables**
+
+   Create a `.env` file and include any necessary frontend env variables (e.g., API base URL):
+
+   ```env
+   REACT_APP_API_BASE_URL=https://your-backend-api.com/api
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+---
+
+## 📦 Redux Configuration
+
+The Redux store is configured in `Redux/store.js`:
+
+```js
+import { configureStore } from "@reduxjs/toolkit";
+import AuthSliceReducer from "./Slices/AuthSlice";
+import courseSliceReducer from "./Slices/CourseSlice";
+import paymentSliceReducer from "./Slices/PaymentSlice";
+import lectureSliceReducer from "./Slices/LectureSlice";
+
+const store = configureStore({
+  reducer: {
+    auth: AuthSliceReducer,
+    course: courseSliceReducer,
+    payments: paymentSliceReducer,
+    lecture: lectureSliceReducer
+  },
+  devTools: true
+});
+
+export default store;
 ```
-    "./src/**/*.{html,js,jsx,ts,tsx}", "./index.html",
 
-```
+---
 
-4. Add the tailwind directives at the top of the `index.css` file
+## 📄 License
 
-```
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-```
+This project is licensed under the MIT License - feel free to use and contribute.
 
-5. Add the following details in the plugin property of tainwind config
+---
 
-```
-    [require("daisyui"), require("@tailwindcss/line-clamp")]
-```
+## 🙌 Contributions
 
-### Adding plugins and dependencies 
+Feel free to fork, open issues, or submit pull requests to enhance the project. 💙
 
-```
-npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
-```
-
-
-### Configure auto import sort esline
-
-1. Install simple import sore
-
-```
-    npm i -D eslint-plugin-simple-import-sort
-```
-
-2. Add rule in `.eslint.cjs`
-
-```
-    'simple-import-sort/imports': 'error'
-```
-
-3. add simple-import sort plugin in `.eslint.cjs`
-
-```
-    plugins: [..., 'simple-import-sort']
-```
-
-4. To enable auto import sort on file save in vscode
-
-    - Open `settings.json`
-    - add the following config
-```
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    }
-```
