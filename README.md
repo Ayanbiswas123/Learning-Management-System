@@ -15,11 +15,11 @@ A full-featured Learning Management System to create, manage, and deliver online
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React.js / Next.js / HTML + Tailwind CSS
-- **Backend:** Node.js + Express / Laravel / Django (your choice)
-- **Database:** MongoDB / MySQL / PostgreSQL
-- **Authentication:** JWT / Session-based
-- **Storage:** Cloudinary / Firebase / AWS S3 (for videos, files)
+- **Frontend:** React.js & HTML + Tailwind CSS
+- **Backend:** Node.js + Express
+- **Database:** MongoDB
+- **Authentication:** JWT
+- **Storage:** Cloudinary
 
 ## 🧪 Setup Instructions
 
